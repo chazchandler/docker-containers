@@ -1,0 +1,24 @@
+version: "2"
+
+services:
+  crashplan:
+    image: gfjardim-crashplan:4.8
+    build: .
+    hostname: crashplan
+    domainname: chaznet.local
+    environment:
+      - TZ="Etc/GMT"
+    ports:
+      - "4242:4242"
+      - "4243:4243"
+      - "4280:4280"
+    volumes:
+      - /dev/urandom:/dev/random
+      - /srv/crashplan/config:/config
+      - /vms/.local/rw:/storage
+      - /crashplan1/rawbackup:/backup/crashplan0
+      - /crashplan2/vmsbackup:/backup/crashplan1
+    network_mode: bridge
+
+
+
